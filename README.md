@@ -11,9 +11,11 @@ This is an Academic project to quiz my knowledge of Javascript with a quiz of Ja
 
 ### Features for Future Updates
 - [ ] - DB to record all user scores and display them. 
+* User Log in
 - [ ] - Different difficulty levels
 * Harder Questions
 * Steeper Time Punishments
 * More/Less Time and/or Questions
 - [ ] - Code/Form input boxes in addition to multiple choice. 
+
  
