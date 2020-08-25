@@ -1,16 +1,26 @@
 //Environment Variables
 var pageContentEl = document.querySelector("#page-content");
-var startQuizEl = pageContentEl.querySelector("#start-quiz");
+var startQuizEl = document.querySelector("#start-quiz");
+var startQuizDivEl = document.querySelector("#start-info");
 var userScore = 0;
 
 //Functions
 
 var clearStartEl = function () {
-    pageContentEl.remove(startQuizEl);
+    startQuizEl.remove(startQuizDivEl);
 };
 
 var loadQuestion = function () {
 
+};
+
+var createQuestionEl = function () {
+    console.log ("creatQuestionEl function called");
+var questionEl = document.createElement("div");
+questionEl.className = 'question-box';
+questionEl.innerHTML = "<h3 class='question'> This is a test first question.</h3>";
+
+pageContentEl.appendChild(questionEl);
 };
 
 //Start Button
@@ -20,12 +30,14 @@ var startButtonHandler = function () {
     // Timer
     var gameTimer = function () {
         alert("Game Over. Your score is " + userScore + '. ');
+        console.log("timer started");
     };
     setTimeout(gameTimer, 60000);
 
     // load html questions
 
     clearStartEl();
+    createQuestionEl();
 
 
     // multiple choice answer form
@@ -33,4 +45,4 @@ var startButtonHandler = function () {
 };
 
 //Event Listeners
-pageContentEl.addEventListener("click", startButtonHandler);
+startQuizEl.addEventListener("click", startButtonHandler);

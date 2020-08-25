@@ -1,10 +1,12 @@
-.main-container{
-    border: solid 1px blue;
-    text-align: center;
-}
+
 
 #start-quiz{
 border: solid 1px red;
 padding: 5px;
 margin: 5px;
+text-align: center;
+}
+
+.question-box{
+    border: solid 1px blue;
 }
