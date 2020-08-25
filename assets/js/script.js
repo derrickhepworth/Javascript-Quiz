@@ -1,15 +1,36 @@
 //Environment Variables
-var pageContentel = document.querySelector("#page-content");
+var pageContentEl = document.querySelector("#page-content");
+var startQuizEl = pageContentEl.querySelector("#start-quiz");
+var userScore = 0;
 
 //Functions
 
-//Start Button
- var startButtonHandler = function () {};
- // start timer
- // load html questions
-    // multiple choice answer form
- // load timer visual
+var clearStartEl = function () {
+    pageContentEl.remove(startQuizEl);
+};
 
+var loadQuestion = function () {
+
+};
+
+//Start Button
+var startButtonHandler = function () {
+    console.log("click event");
+
+    // Timer
+    var gameTimer = function () {
+        alert("Game Over. Your score is " + userScore + '. ');
+    };
+    setTimeout(gameTimer, 60000);
+
+    // load html questions
+
+    clearStartEl();
+
+
+    // multiple choice answer form
+    // load timer visual
+};
 
 //Event Listeners
-pageContentel.addEventListener("click", startButtonHandler);
+pageContentEl.addEventListener("click", startButtonHandler);
