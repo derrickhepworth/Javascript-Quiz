@@ -6,7 +6,7 @@ var startQuizDivEl = document.querySelector("#start-info");
 var userScore = 0;
 var questionId = 0;
 var questionText = "This is just the test text for the question YO.";
-var second = 60;
+var startTime = 60;
 
 //Functions
 
@@ -43,9 +43,8 @@ var createTimerEl = function () {
     headerContentEl.appendChild(timerEl);
 
     var oneSecond = function () {
-        secondDec = second--;
-        console.log(secondDec);
-        timerEl.innerText= secondDec ;
+        secondDec = startTime--;
+        timerEl.innerText= ":" + secondDec ;
     };
     
     setInterval(oneSecond, 1000);
