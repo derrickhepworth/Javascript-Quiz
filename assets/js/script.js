@@ -112,8 +112,16 @@ var questionsArr = [
 var qI = 0;
 var scoreArr = [
     {
-        initials: "DMH",
-        Score: "12"
+        initials: "Bottom",
+        score: 0
+    },
+    {
+        initials: "middle",
+        score: 6
+    },
+    {
+        initals: "Top",
+        score: 12
     }
 ];
 
@@ -157,6 +165,48 @@ var createQuestionEl = function () {
 
 };
 
+var scoreDisplay = function () {
+    var qInitials = prompt("Game over! Enter your initials. No more than 3 charcters. For example 'DMH'.");
+    if (!qInitials || qInitials.length > 3) {
+        qInitials = prompt("Game over! Enter your initials. No more than 3 charcters. For example 'DMH'.");
+        scoreDisplay();
+    };
+    console.log(qInitials);
+    var scoreDataObj = {
+        initials: qInitials,
+        score: userScore
+    };
+
+    scoreArr.push(scoreDataObj);
+    // console.log(scoreArr);
+
+    var saveScore = function () {
+        localStorage.setItem("scoreArr", JSON.stringify(scoreArr));
+    };
+
+    saveScore();
+
+    var loadScore = function () {
+        var gotScores = localStorage.getItem("scoreArr", scoreArr);
+        scoreArr = JSON.parse(gotScores);
+
+        var sortScore = function (a,b) { 
+            if(a.score < b.score){
+                return -1;
+            } else if(a.score > b.score){
+                return 0;
+            } else {
+                return 0;
+            }
+        };
+
+        console.log(scoreArr.sort(sortScore));
+        return scoreArr;
+    };
+
+    loadScore();
+};
+
 var submitButtonHandler = function (event) {
     event.preventDefault();
     var checkedOrNot = document.getElementsByName("thisNameVar");
@@ -186,6 +236,7 @@ var submitButtonHandler = function (event) {
         clearAnswerEl();
         headerContentEl.querySelector("#timer-clock").innerText = "Game Over - You answered all questions! Your Score: " + userScore;
         // clearInterval(timerStart);
+        scoreDisplay();
     } else {
         clearAnswerEl();
         createQuestionEl();
@@ -227,6 +278,7 @@ var timer = function () {
         console.log("Timer Stopped");
         headerContentEl.querySelector("#timer-clock").innerText = "Game Over - You ran out of time! Your Score: " + userScore;
         clearAnswerEl();
+        scoreDisplay();
     };
 
     var timerStart = setInterval(countdown, 1000);
