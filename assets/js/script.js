@@ -13,6 +13,12 @@ var questionsArr = [
         answerCorrect: "You are right",
         answerWrong: "Nah",
         questionId: 1
+    },
+    {
+        ask: "Is this my second array Question?",
+        answerCorrect: "I think you know it is",
+        answerWrong:"I mean... I doubt it",
+        questionId: 0
     }
 ];
 
@@ -29,7 +35,7 @@ var createQuestionEl = function () {
     
     //Question    
     var questionEl = document.createElement("div");
-    questionEl.className = 'question-box-red';
+    questionEl.className = 'question-container';
     questionEl.id = 'question-container';
     questionEl.setAttribute("data-question-id", questionsArr[0].questionId);
     questionEl.innerHTML = "<h3 class='question'>" + questionsArr[0].ask + "</h3>";
@@ -37,31 +43,30 @@ var createQuestionEl = function () {
     console.log("Question #" + questionsArr[0].questionId);
     
     //Answers
-    var answerEl = document.createElement("form");
-    answerEl.className = 'question-box-blue';
-    answerEl.innerHTML = "<input type='radio' class ='question-box-green' id='A' value ='' name ='thisNameVar'><label for='A'>" + questionsArr[0].answerCorrect + "</label><br>"+
+    var formEl = document.createElement("form");
+    formEl.className = 'question-box-blue';
+    formEl.innerHTML = "<input type='radio' class ='question-box-green' id='A' value ='' name ='thisNameVar'><label for='A'>" + questionsArr[0].answerCorrect + "</label><br>"+
     "<input type='radio' class ='question-box-yellow' id='B' value ='' name ='thisNameVar'><label for='B'>" + questionsArr[0].answerWrong + "</label><br>"+
     "<input type='radio' class ='question-box-purple' id='C' value ='' name ='thisNameVar'><label for='C'>" + questionsArr[0].answerWrong + "</label><br>"+
     "<input type='radio' class ='question-box-red' id='D' value ='' name ='thisNameVar'><label for='D'>" + questionsArr[0].answerWrong+ "</label><br>"; 
-    questionEl.appendChild(answerEl);
+    questionEl.appendChild(formEl);
     
     //Submit Button
     var submitButton = document.createElement("button");
     submitButton.innerText = "Submit";
     submitButton.type ="submit";
     submitButton.value = "Submit";
-    questionEl.appendChild(submitButton);
-    console.log(questionEl);
-    console.dir(questionEl);
+    formEl.appendChild(submitButton);
+    // console.log(questionEl);
+    // console.dir(questionEl);
 
-   var findQuestionEl = pageContentEl.querySelector("#question-container");
-
-  return questionEl;
-
+    
+    return questionEl;
+    
 };
 
 var submitButtonHandler = function (event) {
-
+    event.preventDefault();
     console.log("Submit Button Handled!");
 };
 
@@ -108,5 +113,5 @@ var startButtonHandler = function () {
 
 
 //Event Listeners
-startQuizEl.addEventListener("click", startButtonHandler);
+startQuizDivEl.addEventListener("click", startButtonHandler);
 pageContentEl.addEventListener("submit", submitButtonHandler);
