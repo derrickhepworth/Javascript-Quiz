@@ -3,6 +3,7 @@ var headerContentEl = document.querySelector("#header");
 var pageContentEl = document.querySelector("#page-content");
 var startQuizEl = document.querySelector("#start-quiz");
 var startQuizDivEl = document.querySelector("#start-info");
+var findAnswer = document.getElementsByClassName("question-input");
 var userScore = 0;
 var questionId = 0;
 var questionText = "This is just the test text for the question YO.";
@@ -10,7 +11,7 @@ var startTime = 59;
 var questionsArr = [
     {
         ask: "Is this my array test Question?",
-        answerCorrect: "You are right",
+        answerCorrect: "B",
         answerWrong: "Nah",
         questionId: 1
     },
@@ -45,10 +46,10 @@ var createQuestionEl = function () {
     //Answers
     var formEl = document.createElement("form");
     formEl.className = 'question-box-blue';
-    formEl.innerHTML = "<input type='radio' class ='question-box-green' id='A' value ='' name ='thisNameVar'><label for='A'>" + questionsArr[0].answerCorrect + "</label><br>"+
-    "<input type='radio' class ='question-box-yellow' id='B' value ='' name ='thisNameVar'><label for='B'>" + questionsArr[0].answerWrong + "</label><br>"+
-    "<input type='radio' class ='question-box-purple' id='C' value ='' name ='thisNameVar'><label for='C'>" + questionsArr[0].answerWrong + "</label><br>"+
-    "<input type='radio' class ='question-box-red' id='D' value ='' name ='thisNameVar'><label for='D'>" + questionsArr[0].answerWrong+ "</label><br>"; 
+    formEl.innerHTML = "<input type='radio' class ='question-input' id='A'  value ='A' name ='thisNameVar' checked><label for='A'>" + questionsArr[0].answerCorrect + "</label><br>"+
+    "<input type='radio' class ='question-input' id='B'  value='B' name ='thisNameVar' checked><label for='B'>" + questionsArr[0].answerWrong + "</label><br>"+
+    "<input type='radio' class ='question-input' id='C' value='C' name ='thisNameVar' checked><label for='C'>" + questionsArr[0].answerWrong + "</label><br>"+
+    "<input type='radio' class ='question-input' id='D' value='D' name ='thisNameVar' checked><label for='D'>" + questionsArr[0].answerWrong+ "</label><br>"; 
     questionEl.appendChild(formEl);
     
     //Submit Button
@@ -61,13 +62,40 @@ var createQuestionEl = function () {
     // console.dir(questionEl);
 
     
+
+    
     return questionEl;
     
 };
 
 var submitButtonHandler = function (event) {
     event.preventDefault();
-    console.log("Submit Button Handled!");
+    // console.log(findAnswer);
+    
+    var checkedOrNot = document.getElementsByName("thisNameVar");
+    // console.log(checkedOrNot);
+    checkedOrNot.forEach( radio =>{
+        if(radio.checked){
+            // console.log("You Chose:", radio.value);
+            var userAnswer = radio.value;
+            // console.log(userAnswer);
+            if (userAnswer === questionsArr[0].answerCorrect){
+                userScore++;
+                console.log("You chose: " +userAnswer, "- Correct", "Score = " + userScore);
+            }else {
+                console.log("You chose: " +userAnswer, "- Incorrect", "-3 Seconds", "Score = " + userScore);
+                startTime --;
+                startTime --;
+                startTime --;
+            }
+        }
+    });
+
+    
+};
+
+var getUserAnswer = function (event){
+    console.log(event.target);
 };
 
 
