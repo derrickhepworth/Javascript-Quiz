@@ -100,12 +100,12 @@ var questionsArr = [
         answerCorrect: "D",
         questionId: 2
     }, {
-        ask: "That's all the questions. Game over congradulations!",
-        answerA: "",
-        answerB: "",
-        answerC: "",
-        answerD: "",
-        answerCorrect: "",
+        ask: " 12",
+        answerA: "A",
+        answerB: "B",
+        answerC: "C",
+        answerD: "D",
+        answerCorrect: "D",
         questionId: 12
     }
 ];
@@ -113,11 +113,10 @@ var qI = 0;
 
 //Functions
 var clearStartEl = function () {
-    startQuizEl.removeChild(startQuizDivEl);
+    startQuizEl.remove(startQuizDivEl);
 };
 
 var clearAnswerEl = function () {
-    console.log("child[0]", pageContentEl.childNodes[0]);
     pageContentEl.removeChild(pageContentEl.childNodes[1]);
 };
 
@@ -175,13 +174,15 @@ var submitButtonHandler = function (event) {
     
     
     qI++;
-    createQuestionEl();
-    clearAnswerEl();
     questionNumber++;
-
-    if (questionNumber >= 12){
+    
+    if (questionNumber > questionsArr.length){
         clearAnswerEl();
-        alert("Game over! You answered all the Questions. Final Score = " +userScore);
+        headerContentEl.querySelector("#timer-clock").innerText = "Game Over - You answered all questions! Your Score: " + userScore;
+        // clearInterval(timerStart);
+    } else {
+        clearAnswerEl();
+        createQuestionEl();
     };
 
 
@@ -208,7 +209,9 @@ var timer = function () {
         secondMarker = startTime--;
         if (secondMarker <= - 1) {
             stopTimer();
-        } else {
+        } else if(questionNumber > questionsArr.length){
+            clearInterval(timerStart);
+        }else{
             headerContentEl.querySelector("#timer-clock").innerText = ":" + secondMarker;
         }
     };
@@ -216,10 +219,13 @@ var timer = function () {
     var stopTimer = function () {
         clearInterval(timerStart);
         console.log("Timer Stopped");
-        headerContentEl.querySelector("#timer-clock").innerText = "Game Over!! Your Score: " + userScore;
+        headerContentEl.querySelector("#timer-clock").innerText = "Game Over - You ran out of time! Your Score: " + userScore;
+        clearAnswerEl();
     };
 
     var timerStart = setInterval(countdown, 1000);
+
+   
 };
 
 //Start Button
