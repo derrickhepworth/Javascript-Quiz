@@ -7,6 +7,8 @@ var findAnswer = document.getElementsByClassName("question-input");
 var answerDiv = document.querySelector("#question-container");
 var userScore = 0;
 var startTime = 59;
+var gameContinue = true;
+var questionNumber = 1;
 var questionsArr = [
     {
         ask: "Is this my array test Question?",
@@ -25,7 +27,7 @@ var questionsArr = [
         answerD: "2D",
         answerCorrect: "A",
         questionId: 2
-    },  {
+    }, {
         ask: "3 Question?",
         answerA: "3A",
         answerB: "3B",
@@ -33,7 +35,7 @@ var questionsArr = [
         answerD: "3D",
         answerCorrect: "B",
         questionId: 3
-    },  {
+    }, {
         ask: "4 Question?",
         answerA: "2A",
         answerB: "2B",
@@ -41,7 +43,7 @@ var questionsArr = [
         answerD: "2D",
         answerCorrect: "C",
         questionId: 4
-    },  {
+    }, {
         ask: "5 Question?",
         answerA: "2A",
         answerB: "2B",
@@ -49,7 +51,7 @@ var questionsArr = [
         answerD: "2D",
         answerCorrect: "D",
         questionId: 5
-    },  {
+    }, {
         ask: "6 Question?",
         answerA: "2A",
         answerB: "2B",
@@ -57,7 +59,7 @@ var questionsArr = [
         answerD: "2D",
         answerCorrect: "D",
         questionId: 6
-    },  {
+    }, {
         ask: "7 Question?",
         answerA: "2A",
         answerB: "2B",
@@ -65,7 +67,7 @@ var questionsArr = [
         answerD: "2D",
         answerCorrect: "D",
         questionId: 7
-    },  {
+    }, {
         ask: "8 Question?",
         answerA: "2A",
         answerB: "2B",
@@ -73,7 +75,7 @@ var questionsArr = [
         answerD: "2D",
         answerCorrect: "D",
         questionId: 2
-    },  {
+    }, {
         ask: "9 Question?",
         answerA: "2A",
         answerB: "2B",
@@ -81,7 +83,7 @@ var questionsArr = [
         answerD: "2D",
         answerCorrect: "D",
         questionId: 2
-    },  {
+    }, {
         ask: "10 Question?",
         answerA: "2A",
         answerB: "2B",
@@ -89,7 +91,7 @@ var questionsArr = [
         answerD: "2D",
         answerCorrect: "D",
         questionId: 2
-    },  {
+    }, {
         ask: "11 Question?",
         answerA: "2A",
         answerB: "2B",
@@ -97,14 +99,14 @@ var questionsArr = [
         answerD: "2D",
         answerCorrect: "D",
         questionId: 2
-    },  {
-        ask: "12 Question?",
-        answerA: "2A",
-        answerB: "2B",
-        answerC: "2C",
-        answerD: "2D",
-        answerCorrect: "D",
-        questionId: 2
+    }, {
+        ask: "That's all the questions. Game over congradulations!",
+        answerA: "",
+        answerB: "",
+        answerC: "",
+        answerD: "",
+        answerCorrect: "",
+        questionId: 12
     }
 ];
 var qI = 0;
@@ -132,6 +134,7 @@ var createQuestionEl = function () {
 
     //Answers
     var formEl = document.createElement("form");
+    formEl.id = 'endCheck';
     formEl.className = 'question-box-blue';
     formEl.innerHTML = "<input type='radio' class ='question-input' id='A'  value ='A' name ='thisNameVar' checked><label for='A'>" + questionsArr[qI].answerA + "</label><br>" +
         "<input type='radio' class ='question-input' id='B'  value='B' name ='thisNameVar' checked><label for='B'>" + questionsArr[qI].answerB + "</label><br>" +
@@ -151,7 +154,6 @@ var createQuestionEl = function () {
 
 var submitButtonHandler = function (event) {
     event.preventDefault();
-
     var checkedOrNot = document.getElementsByName("thisNameVar");
     // console.log(checkedOrNot);
     checkedOrNot.forEach(radio => {
@@ -160,20 +162,29 @@ var submitButtonHandler = function (event) {
             if (userAnswer === questionsArr[qI].answerCorrect) {
                 userScore++;
                 console.log("You chose: " + userAnswer, "- Correct", "Score = " + userScore);
-
+                
             } else {
                 console.log("You chose: " + userAnswer, "- Incorrect", "-3 Seconds", "Score = " + userScore);
                 startTime--;
                 startTime--;
                 startTime--;
-
+                
             }
         }
     });
-
+    
+    
     qI++;
     createQuestionEl();
     clearAnswerEl();
+    questionNumber++;
+
+    if (questionNumber >= 12){
+        clearAnswerEl();
+        alert("Game over! You answered all the Questions. Final Score = " +userScore);
+    };
+
+
 };
 
 var getUserAnswer = function (event) {
@@ -218,6 +229,9 @@ var startButtonHandler = function () {
     createQuestionEl();
     createTimerEl();
 };
+
+
+
 
 
 //Event Listeners
