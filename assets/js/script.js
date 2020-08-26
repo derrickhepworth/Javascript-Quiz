@@ -28,54 +28,6 @@ var questionsArr = [
         answerCorrect: "A",
         questionId: 2
     }, {
-        ask: "3 Question?",
-        answerA: "3A",
-        answerB: "3B",
-        answerC: "3C",
-        answerD: "3D",
-        answerCorrect: "B",
-        questionId: 3
-    }, {
-        ask: "4 Question?",
-        answerA: "2A",
-        answerB: "2B",
-        answerC: "2C",
-        answerD: "2D",
-        answerCorrect: "C",
-        questionId: 4
-    }, {
-        ask: "5 Question?",
-        answerA: "2A",
-        answerB: "2B",
-        answerC: "2C",
-        answerD: "2D",
-        answerCorrect: "D",
-        questionId: 5
-    }, {
-        ask: "6 Question?",
-        answerA: "2A",
-        answerB: "2B",
-        answerC: "2C",
-        answerD: "2D",
-        answerCorrect: "D",
-        questionId: 6
-    }, {
-        ask: "7 Question?",
-        answerA: "2A",
-        answerB: "2B",
-        answerC: "2C",
-        answerD: "2D",
-        answerCorrect: "D",
-        questionId: 7
-    }, {
-        ask: "8 Question?",
-        answerA: "2A",
-        answerB: "2B",
-        answerC: "2C",
-        answerD: "2D",
-        answerCorrect: "D",
-        questionId: 2
-    }, {
         ask: "9 Question?",
         answerA: "2A",
         answerB: "2B",
@@ -83,30 +35,6 @@ var questionsArr = [
         answerD: "2D",
         answerCorrect: "D",
         questionId: 2
-    }, {
-        ask: "10 Question?",
-        answerA: "2A",
-        answerB: "2B",
-        answerC: "2C",
-        answerD: "2D",
-        answerCorrect: "D",
-        questionId: 2
-    }, {
-        ask: "11 Question?",
-        answerA: "2A",
-        answerB: "2B",
-        answerC: "2C",
-        answerD: "2D",
-        answerCorrect: "D",
-        questionId: 2
-    }, {
-        ask: " 12",
-        answerA: "A",
-        answerB: "B",
-        answerC: "C",
-        answerD: "D",
-        answerCorrect: "D",
-        questionId: 12
     }
 ];
 var qI = 0;
@@ -165,47 +93,52 @@ var createQuestionEl = function () {
 
 };
 
+var saveScore = function () {
+    console.log("inside", scoreArr);
+    localStorage.setItem("scoreArr", JSON.stringify(scoreArr));
+};
+
+var loadScore = function () {
+    var gotScores = localStorage.getItem("scoreArr", scoreArr);
+    scoreArr = JSON.parse(gotScores);
+
+    var sortScore = function (a, b) {
+        if (a.score < b.score) {
+            return 1;
+        } else if (a.score > b.score) {
+            return -1;
+        } else {
+            return 0;
+        }
+    };
+
+    console.log(scoreArr.sort(sortScore));
+
+    console.log(scoreArr);
+    return scoreArr;
+};
+
+
+
 var scoreDisplay = function () {
     var qInitials = prompt("Game over! Enter your initials. No more than 3 charcters. For example 'DMH'.");
     if (!qInitials || qInitials.length > 3) {
         qInitials = prompt("Game over! Enter your initials. No more than 3 charcters. For example 'DMH'.");
         scoreDisplay();
     };
-    console.log(qInitials);
+    // console.log(qInitials);
+
     var scoreDataObj = {
         initials: qInitials,
         score: userScore
     };
 
+    console.log("Object created", scoreDataObj);
     scoreArr.push(scoreDataObj);
-    // console.log(scoreArr);
-
-    var saveScore = function () {
-        localStorage.setItem("scoreArr", JSON.stringify(scoreArr));
-    };
-
+    console.log("Array after push", scoreArr);
     saveScore();
-
-    var loadScore = function () {
-        var gotScores = localStorage.getItem("scoreArr", scoreArr);
-        scoreArr = JSON.parse(gotScores);
-
-        var sortScore = function (a,b) { 
-            if(a.score < b.score){
-                return 1;
-            } else if(a.score > b.score){
-                return -1;
-            } else {
-                return 0;
-            }
-        };
-
-        console.log(scoreArr.sort(sortScore));
-        return scoreArr;
-    };
-
-    loadScore();
 };
+
 
 var submitButtonHandler = function (event) {
     event.preventDefault();
