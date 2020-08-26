@@ -110,6 +110,12 @@ var questionsArr = [
     }
 ];
 var qI = 0;
+var scoreArr = [
+    {
+        initials: "DMH",
+        Score: "12"
+    }
+];
 
 //Functions
 var clearStartEl = function () {
@@ -161,22 +167,22 @@ var submitButtonHandler = function (event) {
             if (userAnswer === questionsArr[qI].answerCorrect) {
                 userScore++;
                 console.log("You chose: " + userAnswer, "- Correct", "Score = " + userScore);
-                
+
             } else {
                 console.log("You chose: " + userAnswer, "- Incorrect", "-3 Seconds", "Score = " + userScore);
                 startTime--;
                 startTime--;
                 startTime--;
-                
+
             }
         }
     });
-    
-    
+
+
     qI++;
     questionNumber++;
-    
-    if (questionNumber > questionsArr.length){
+
+    if (questionNumber > questionsArr.length) {
         clearAnswerEl();
         headerContentEl.querySelector("#timer-clock").innerText = "Game Over - You answered all questions! Your Score: " + userScore;
         // clearInterval(timerStart);
@@ -209,9 +215,9 @@ var timer = function () {
         secondMarker = startTime--;
         if (secondMarker <= - 1) {
             stopTimer();
-        } else if(questionNumber > questionsArr.length){
+        } else if (questionNumber > questionsArr.length) {
             clearInterval(timerStart);
-        }else{
+        } else {
             headerContentEl.querySelector("#timer-clock").innerText = ":" + secondMarker;
         }
     };
@@ -225,7 +231,7 @@ var timer = function () {
 
     var timerStart = setInterval(countdown, 1000);
 
-   
+
 };
 
 //Start Button
