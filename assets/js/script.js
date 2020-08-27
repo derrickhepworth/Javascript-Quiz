@@ -240,7 +240,7 @@ var timer = function () {
     var stopTimer = function () {
         clearInterval(timerStart);
         console.log("Timer Stopped");
-        headerContentEl.querySelector("#timer-clock").innerText = "Game Over - You ran out of time! Your Score: " + userScore;
+        headerContentEl.querySelector("#timer-clock").innerText = "You ran out of time! Score: " + userScore;
         clearAnswerEl();
         scoreDisplay();
     };
