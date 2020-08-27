@@ -87,6 +87,7 @@ var createScoreEl = function (){
 
     var scoreBannerEl = document.createElement("h2")
     scoreBannerEl.className = "score-banner";
+    scoreBoxEl.innerText = "High Scores";
     scoreBoxEl.appendChild(scoreBannerEl);
 
     for (var i =0; i<scoreArr.length; i++){
