@@ -19,7 +19,7 @@ var questionsArr = [
         answerCorrect: "C",
         questionId: 2
     }, {
-        ask: "What does the '--' operator do?",
+        ask: "What does the -- operator do?",
         answerA: "Decrement",
         answerB: "Increment",
         answerC: "Multiply",
@@ -196,7 +196,7 @@ var createScoreEl = function () {
 
     var scoreBannerEl = document.createElement("h2")
     scoreBannerEl.className = "score-banner";
-    scoreBoxEl.innerText = "High Scores";
+    scoreBannerEl.innerText = "High Scores";
     scoreBoxEl.appendChild(scoreBannerEl);
 
     var buttonDivEl = document.createElement("div");

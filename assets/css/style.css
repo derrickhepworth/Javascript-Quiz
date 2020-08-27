@@ -93,7 +93,35 @@ color:whitesmoke;
     margin-left: 5px;
     margin-bottom: 5px;
 }
+.score-box{
+    border: navy 3px solid;
+    border-radius: 15px;
+}
+.score-box h2{
+    text-align: center;
+    background-color: navy;
+    border-top-right-radius: 11px;
+    border-top-left-radius: 11px;
+    color: whitesmoke;
+    border-bottom: black;
+    margin-top: 0;
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+.score-box ol{
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+
+ol:nth-child(even){
+    background-color: rgba(34, 84, 158, 0.4);
+
+    /* color: whitesmoke; */
+
+}
+
 
 *{
-    border: solid 1px red;
+    /* border: solid 1px red; */
 }
