@@ -38,13 +38,7 @@ var questionsArr = [
     }
 ];
 var qI = 0;
-var scoreArr = [
-    {
-        initials: "SAD",
-        score: 0
-    }
-  
-];
+var scoreArr = [];
 
 //Functions
 var clearStartEl = function () {
@@ -96,7 +90,7 @@ var createScoreEl = function (){
     scoreBoxEl.appendChild(scoreBannerEl);
 
     for (var i =0; i<scoreArr.length; i++){
-        var scoreEl = document.createElement("li");
+        var scoreEl = document.createElement("ol");
         scoreEl.innerText = ((i +1 ) + ". " + scoreArr[i].initials + "......." + scoreArr[i].score);
         scoreBoxEl.appendChild(scoreEl);
     };
@@ -121,7 +115,19 @@ var sortScore = function (a, b) {
 var loadScore = function () {
     var gotScores = localStorage.getItem("scoreArr", scoreArr);
     scoreArr = JSON.parse(gotScores);
-    console.log("gotScores", gotScores)
+    console.log("gotScores", gotScores);
+
+    if (!gotScores){
+        var firstScoreArr =[
+            {
+                initials: BAD,
+                score: 0 
+            }
+        ];
+
+        scoreArr =firstScoreArr;
+        saveScore();
+    } else {
 
     // console.log(scoreArr.sort(sortScore));
     sortedScores = scoreArr.sort(sortScore);
@@ -129,15 +135,16 @@ var loadScore = function () {
     console.log("sorted and changed", scoreArr);
     // console.log(scoreArr);
     return scoreArr;
+    }
 };
 
 
 
 var scoreDisplay = function () {
     // console.log("loaded", scoreArr);
-    var qInitials = prompt("Game over! Enter your initials. No more than 3 charcters. For example 'DMH'.");
+    var qInitials = prompt("Game over! Enter your initials. No more than 3 charcters. For example 'DMH'.").toUpperCase();
     if (!qInitials || qInitials.length > 3) {
-        qInitials = prompt("Game over! Enter your initials. No more than 3 charcters. For example 'DMH'.");
+        qInitials = prompt("Game over! Enter your initials. No more than 3 charcters. For example 'DMH'.").toUpperCase();
         scoreDisplay();
     };
     // console.log(qInitials);
@@ -196,9 +203,7 @@ var submitButtonHandler = function (event) {
 
 };
 
-var getUserAnswer = function (event) {
-    console.log(event.target);
-};
+
 
 var createTimerEl = function () {
 
@@ -243,7 +248,6 @@ var startButtonHandler = function () {
     clearStartEl();
     createQuestionEl();
     createTimerEl();
-    saveScore();
     loadScore();
 
 };
