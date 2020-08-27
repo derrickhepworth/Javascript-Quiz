@@ -1,3 +1,130 @@
+
+
+var questionsArr = [
+    {
+        ask: "Which of the following are not valid data types?",
+        answerA: "Boolean",
+        answerB: "Number",
+        answerC: "String",
+        answerD: "All of the above are valid.",
+        answerCorrect: "D",
+        questionId: 1
+    },
+    {
+        ask: "Which of the following keywords is not a binding in Javascript?",
+        answerA: "const",
+        answerB: "let",
+        answerC: "means",
+        answerD: "var",
+        answerCorrect: "C",
+        questionId: 2
+    }, {
+        ask: "What does the '--' operator do?",
+        answerA: "Decrement",
+        answerB: "Increment",
+        answerC: "Multiply",
+        answerD: "Subtract",
+        answerCorrect: "A",
+        questionId: 3
+    }, {
+        ask: "How many times will 'for (var i =0; i <12; i++)' loop?",
+        answerA: "12",
+        answerB: "11",
+        answerC: "0",
+        answerD: "infinite",
+        answerCorrect: "A",
+        questionId: 4
+    }, {
+        ask: "What does the '%' operator do?",
+        answerA: "Decrement",
+        answerB: "Divide",
+        answerC: "Multiply",
+        answerD: "Division Remainder",
+        answerCorrect: "D",
+        questionId: 5
+    }, {
+        ask: "For console.log( 1 + '1' ); what will be displayed in the console?",
+        answerA: "2",
+        answerB: "11",
+        answerC: "1 + '1'",
+        answerD: "undefined",
+        answerCorrect: "B",
+        questionId: 6
+    }, {
+        ask: "What does the logical operator '||'  mean?",
+        answerA: "and",
+        answerB: "and/or",
+        answerC: "or",
+        answerD: "if",
+        answerCorrect: "A",
+        questionId: 7
+    }, {
+        ask: "Which binding will propogate CONST or VAR?",
+        answerA: "CONST",
+        answerB: "They both will",
+        answerC: "Neither will",
+        answerD: "VAR",
+        answerCorrect: "D",
+        questionId: 8
+    }, {
+        ask: "Which of the follwing is in camel case notation?",
+        answerA: "this-One",
+        answerB: "this_One",
+        answerC: "thisOne",
+        answerD: "this.One",
+        answerCorrect: "C",
+        questionId: 9
+    }, {
+        ask: "In the following function which is a parameter?  'function myFunction (a,b){math.floor(a-b);};'",
+        answerA: "math",
+        answerB: "b",
+        answerC: "floor",
+        answerD: "(a-b)",
+        answerCorrect: "B",
+        questionId: 10
+    }, {
+        ask: "Which type of data would 'if(!myVar){};' check for?",
+        answerA: "All types",
+        answerB: "Number",
+        answerC: "Boolean",
+        answerD: "The type of data has nothing to do with this.",
+        answerCorrect: "C",
+        questionId: 11
+    }, {
+        ask: "What is another name for Javascript?",
+        answerA: "Java",
+        answerB: "ECMAScript",
+        answerC: "Netscape",
+        answerD: "Java++",
+        answerCorrect: "B",
+        questionId: 12
+    }, {
+        ask: "Which operator is a true equality check?",
+        answerA: "===",
+        answerB: "==",
+        answerC: "=",
+        answerD: "!=",
+        answerCorrect: "A",
+        questionId: 13
+    },  {
+        ask: "Which is not a type of loop?",
+        answerA: "for",
+        answerB: "while",
+        answerC: "do...while",
+        answerD: "All of the above are loops",
+        answerCorrect: "D",
+        questionId: 14
+    }, {
+        ask: "Which of the following is not an event that can be listened for?",
+        answerA: "click",
+        answerB: "keyup",
+        answerC: "volumeup",
+        answerD: "submit",
+        answerCorrect: "A",
+        questionId: 15
+    }
+];
+
 //Environment Variables
 var headerContentEl = document.querySelector("#header");
 var pageContentEl = document.querySelector("#page-content");
@@ -8,34 +135,7 @@ var answerDiv = document.querySelector("#question-container");
 var userScore = 0;
 var startTime = 59;
 var questionNumber = 1;
-var questionsArr = [
-    {
-        ask: "Is this my array test Question?",
-        answerA: "It ain't me",
-        answerB: "I am the correct one",
-        answerC: "Could be me... but it's not",
-        answerD: "No way",
-        answerCorrect: "B",
-        questionId: 1
-    },
-    {
-        ask: "2 Question?",
-        answerA: "2A",
-        answerB: "2B",
-        answerC: "2C",
-        answerD: "2D",
-        answerCorrect: "A",
-        questionId: 2
-    }, {
-        ask: "9 Question?",
-        answerA: "2A",
-        answerB: "2B",
-        answerC: "2C",
-        answerD: "2D",
-        answerCorrect: "D",
-        questionId: 2
-    }
-];
+
 var qI = 0;
 var scoreArr = [];
 
@@ -150,12 +250,15 @@ var loadScore = function () {
 
 var scoreDisplay = function () {
     // console.log("loaded", scoreArr);
-    var qInitials = prompt("Game over! Enter your initials. No more than 3 charcters. For example 'DMH'.").toUpperCase();
-    if (!qInitials || qInitials.length > 3) {
-        qInitials = prompt("Game over! Enter your initials. No more than 3 charcters. For example 'DMH'.").toUpperCase();
-        scoreDisplay();
+    var checkInitialsLength = function () {
+
+        if (!qInitials || qInitials.length > 3) {
+            qInitials = prompt("Please enter 1-3 initials.").toUpperCase();
+            checkInitialsLength();
+        };
     };
-    // console.log(qInitials);
+    var qInitials = prompt("Game over! Enter your initials. For example 'DMH'.").toUpperCase();
+    checkInitialsLength();
 
     var scoreDataObj = {
         initials: qInitials,
@@ -217,7 +320,7 @@ var createTimerEl = function () {
 
     var timerEl = document.createElement("h1");
     timerEl.id = "timer-clock";
-    timerEl.innerText = "1:00";
+    timerEl.innerText = "3:00";
     headerContentEl.appendChild(timerEl);
 
     timer();
