@@ -292,14 +292,13 @@ var submitButtonHandler = function (event) {
             var userAnswer = radio.value;
             if (userAnswer === questionsArr[qI].answerCorrect) {
                 userScore++;
-                // console.log("You chose: " + userAnswer, "- Correct", "Score = " + userScore);
 
             } else {
-                // console.log("You chose: " + userAnswer, "- Incorrect", "-3 Seconds", "Score = " + userScore);
                 startTime--;
                 startTime--;
                 startTime--;
-
+                headerContentEl.querySelector("#timer-clock").setAttribute("style", "color: darkred;");
+                headerContentEl.querySelector("#timer-clock").innerText = ":" + (secondMarker-1) + "(-3)";
             }
         }
     });
@@ -340,11 +339,23 @@ var timer = function () {
         secondMarker = startTime--;
         if (secondMarker <= - 1) {
             stopTimer();
+            headerContentEl.querySelector("#timer-clock").removeAttribute("style");
         } else if (questionNumber > questionsArr.length) {
             clearInterval(timerStart);
+            headerContentEl.querySelector("#timer-clock").removeAttribute("style");
+
         } else {
             headerContentEl.querySelector("#timer-clock").innerText = ":" + secondMarker;
-        }
+            if (secondMarker < 11){
+                 headerContentEl.querySelector("#timer-clock").setAttribute("style", "color: darkred;");
+                 headerContentEl.querySelector("#timer-clock").innerText = ":" + secondMarker;
+
+            } else {
+                headerContentEl.querySelector("#timer-clock").removeAttribute("style");
+                headerContentEl.querySelector("#timer-clock").innerText = ":" + secondMarker;
+            };
+        };
+
     };
 
     var stopTimer = function () {
