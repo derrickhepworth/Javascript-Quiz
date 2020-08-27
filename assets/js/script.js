@@ -2,7 +2,7 @@
 
 var questionsArr = [
     {
-        ask: "Which of the following are not valid data types?",
+        ask: "Which of the following is not a valid data type?",
         answerA: "Boolean",
         answerB: "Number",
         answerC: "String",
@@ -19,7 +19,7 @@ var questionsArr = [
         answerCorrect: "C",
         questionId: 2
     }, {
-        ask: "What does the '--' operator do?",
+        ask: "What does the -- operator do?",
         answerA: "Decrement",
         answerB: "Increment",
         answerC: "Multiply",
@@ -152,7 +152,7 @@ var createQuestionEl = function () {
 
     //Question    
     var questionEl = document.createElement("div");
-    questionEl.className = 'question-container question-box-green';
+    questionEl.className = 'question-container';
     questionEl.id = 'question-container';
     questionEl.setAttribute("data-question-id", questionsArr[qI].questionId);
     questionEl.innerHTML = "<h3 class='question'>" + questionsArr[qI].ask + "</h3>";
@@ -162,19 +162,25 @@ var createQuestionEl = function () {
     //Answers
     var formEl = document.createElement("form");
     formEl.id = 'endCheck';
-    formEl.className = 'question-box-blue';
-    formEl.innerHTML = "<input type='radio' class ='question-input' id='A'  value ='A' name ='thisNameVar' checked><label for='A'>" + questionsArr[qI].answerA + "</label><br>" +
-        "<input type='radio' class ='question-input' id='B'  value='B' name ='thisNameVar' checked><label for='B'>" + questionsArr[qI].answerB + "</label><br>" +
-        "<input type='radio' class ='question-input' id='C' value='C' name ='thisNameVar' checked><label for='C'>" + questionsArr[qI].answerC + "</label><br>" +
-        "<input type='radio' class ='question-input' id='D' value='D' name ='thisNameVar' checked><label for='D'>" + questionsArr[qI].answerD + "</label><br>";
+    formEl.className = 'answer-box';
+    formEl.innerHTML = "<input type='radio' class ='question-radio' id='A'  value ='A' name ='thisNameVar' checked><label class='question-content' for='A'>A - " + questionsArr[qI].answerA + "</label><br>" +
+        "<input type='radio' class ='question-radio' id='B'  value='B' name ='thisNameVar' checked><label class='question-content' for='B'>B - " + questionsArr[qI].answerB + "</label><br>" +
+        "<input type='radio' class ='question-radio' id='C' value='C' name ='thisNameVar' checked><label class='question-content' for='C'>C - " + questionsArr[qI].answerC + "</label><br>" +
+        "<input type='radio' class ='question-radio' id='D' value='D' name ='thisNameVar' checked><label class='question-content' for='D'>D - " + questionsArr[qI].answerD + "</label><br>";
     questionEl.appendChild(formEl);
 
+    
+
     //Submit Button
+    var submitButtonDivEl= document.createElement("div");
+    submitButtonDivEl.className = "btn-container";
+    formEl.appendChild(submitButtonDivEl);
+
     var submitButton = document.createElement("button");
     submitButton.innerText = "Submit";
     submitButton.type = "submit";
     submitButton.value = "Submit";
-    formEl.appendChild(submitButton);
+    submitButtonDivEl.appendChild(submitButton);
     return questionEl;
 
 };
@@ -190,10 +196,11 @@ var createScoreEl = function () {
 
     var scoreBannerEl = document.createElement("h2")
     scoreBannerEl.className = "score-banner";
-    scoreBoxEl.innerText = "High Scores";
+    scoreBannerEl.innerText = "High Scores";
     scoreBoxEl.appendChild(scoreBannerEl);
 
     var buttonDivEl = document.createElement("div");
+    buttonDivEl.id = "refresh-btn";
     buttonDivEl.innerHTML = ("<button>Take Quiz Again</button>");
     pageContentEl.appendChild(buttonDivEl);
 
@@ -253,12 +260,13 @@ var scoreDisplay = function () {
     var checkInitialsLength = function () {
 
         if (!qInitials || qInitials.length > 3) {
-            qInitials = prompt("Please enter 1-3 initials.").toUpperCase();
+            qInitials = prompt("Please enter 1-3 initials.");
             checkInitialsLength();
         };
     };
-    var qInitials = prompt("Game over! Enter your initials. For example 'DMH'.").toUpperCase();
+    var qInitials = prompt("Game over! Enter your initials. For example 'DMH'.");
     checkInitialsLength();
+    qInitials = qInitials.toUpperCase();
 
     var scoreDataObj = {
         initials: qInitials,
@@ -273,6 +281,7 @@ var scoreDisplay = function () {
     console.log("array after push and sort", scoreArr);
     saveScore();
     createScoreEl();
+    return qInitials;
 };
 
 
@@ -285,14 +294,13 @@ var submitButtonHandler = function (event) {
             var userAnswer = radio.value;
             if (userAnswer === questionsArr[qI].answerCorrect) {
                 userScore++;
-                // console.log("You chose: " + userAnswer, "- Correct", "Score = " + userScore);
 
             } else {
-                // console.log("You chose: " + userAnswer, "- Incorrect", "-3 Seconds", "Score = " + userScore);
                 startTime--;
                 startTime--;
                 startTime--;
-
+                headerContentEl.querySelector("#timer-clock").setAttribute("style", "color: red;");
+                headerContentEl.querySelector("#timer-clock").innerText = ":" + (secondMarker-1) + "(-3)";
             }
         }
     });
@@ -303,7 +311,7 @@ var submitButtonHandler = function (event) {
 
     if (questionNumber > questionsArr.length) {
         clearAnswerEl();
-        headerContentEl.querySelector("#timer-clock").innerText = "You answered all questions! Score: " + userScore;
+        headerContentEl.querySelector("#timer-clock").innerText =  " You answered all questions! Score: " + userScore;
         // clearInterval(timerStart);
         scoreDisplay();
     } else {
@@ -320,7 +328,7 @@ var createTimerEl = function () {
 
     var timerEl = document.createElement("h1");
     timerEl.id = "timer-clock";
-    timerEl.innerText = "3:00";
+    timerEl.innerText = "1:00";
     headerContentEl.appendChild(timerEl);
 
     timer();
@@ -333,22 +341,41 @@ var timer = function () {
         secondMarker = startTime--;
         if (secondMarker <= - 1) {
             stopTimer();
+            headerContentEl.querySelector("#timer-clock").removeAttribute("style");
+            headerContentEl.querySelector("#timer-clock").setAttribute("style", "color: navy;");
+
+
         } else if (questionNumber > questionsArr.length) {
             clearInterval(timerStart);
+            headerContentEl.querySelector("#timer-clock").removeAttribute("style");
+            headerContentEl.querySelector("#timer-clock").setAttribute("style", "color: navy;");
+
+
         } else {
             headerContentEl.querySelector("#timer-clock").innerText = ":" + secondMarker;
-        }
+            if (secondMarker < 11){
+                 headerContentEl.querySelector("#timer-clock").setAttribute("style", "color: red;");
+                 headerContentEl.querySelector("#timer-clock").innerText = ":" + secondMarker;
+
+            } else {
+                headerContentEl.querySelector("#timer-clock").removeAttribute("style");
+                headerContentEl.querySelector("#timer-clock").innerText = ":" + secondMarker;
+            };
+        };
+
     };
 
     var stopTimer = function () {
         clearInterval(timerStart);
         console.log("Timer Stopped");
-        headerContentEl.querySelector("#timer-clock").innerText = "You ran out of time! Score: " + userScore;
+        headerContentEl.querySelector("#timer-clock").innerText =  "You ran out of time! Score: " + userScore;
         clearAnswerEl();
         scoreDisplay();
     };
 
+    //BLOCKED OUT FOR STYLING NO RESET
     var timerStart = setInterval(countdown, 1000);
+    
 
 
 };
