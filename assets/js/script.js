@@ -7,7 +7,6 @@ var findAnswer = document.getElementsByClassName("question-input");
 var answerDiv = document.querySelector("#question-container");
 var userScore = 0;
 var startTime = 59;
-var gameContinue = true;
 var questionNumber = 1;
 var questionsArr = [
     {
@@ -83,12 +82,20 @@ var createQuestionEl = function () {
 var createScoreEl = function (){
     var scoreBoxEl = document.createElement("div");
     scoreBoxEl.className = "score-box";
+    scoreBoxEl.id = "score-box";
     pageContentEl.appendChild(scoreBoxEl);
+    var againEl = document.querySelector("#score-box");
+    pageContentEl.addEventListener("click", againButtonHandler);
+
 
     var scoreBannerEl = document.createElement("h2")
     scoreBannerEl.className = "score-banner";
     scoreBoxEl.innerText = "High Scores";
     scoreBoxEl.appendChild(scoreBannerEl);
+
+    var buttonDivEl = document.createElement("div");
+    buttonDivEl.innerHTML = ("<button>Take Quiz Again</button>");
+    pageContentEl.appendChild(buttonDivEl);
 
     for (var i =0; i<scoreArr.length; i++){
         var scoreEl = document.createElement("ol");
@@ -121,7 +128,7 @@ var loadScore = function () {
     if (!gotScores){
         var firstScoreArr =[
             {
-                initials: BAD,
+                initials: "SAD",
                 score: 0 
             }
         ];
@@ -252,6 +259,12 @@ var startButtonHandler = function () {
     loadScore();
 
 };
+
+var againButtonHandler = function () {
+ location.reload();
+
+};
+
 
 
 
