@@ -79,7 +79,7 @@ var createQuestionEl = function () {
 
 };
 
-var createScoreEl = function (){
+var createScoreEl = function () {
     var scoreBoxEl = document.createElement("div");
     scoreBoxEl.className = "score-box";
     scoreBoxEl.id = "score-box";
@@ -97,9 +97,9 @@ var createScoreEl = function (){
     buttonDivEl.innerHTML = ("<button>Take Quiz Again</button>");
     pageContentEl.appendChild(buttonDivEl);
 
-    for (var i =0; i<scoreArr.length; i++){
+    for (var i = 0; i < scoreArr.length; i++) {
         var scoreEl = document.createElement("ol");
-        scoreEl.innerText = ((i +1 ) + ". " + scoreArr[i].initials + "......." + scoreArr[i].score);
+        scoreEl.innerText = ((i + 1) + ". " + scoreArr[i].initials + "......." + scoreArr[i].score);
         scoreBoxEl.appendChild(scoreEl);
     };
 };
@@ -125,24 +125,24 @@ var loadScore = function () {
     scoreArr = JSON.parse(gotScores);
     console.log("gotScores", gotScores);
 
-    if (!gotScores){
-        var firstScoreArr =[
+    if (!gotScores) {
+        var firstScoreArr = [
             {
                 initials: "SAD",
-                score: 0 
+                score: 0
             }
         ];
 
-        scoreArr =firstScoreArr;
+        scoreArr = firstScoreArr;
         saveScore();
     } else {
 
-    // console.log(scoreArr.sort(sortScore));
-    sortedScores = scoreArr.sort(sortScore);
-    scoreArr = sortedScores;
-    console.log("sorted and changed", scoreArr);
-    // console.log(scoreArr);
-    return scoreArr;
+        // console.log(scoreArr.sort(sortScore));
+        sortedScores = scoreArr.sort(sortScore);
+        scoreArr = sortedScores;
+        console.log("sorted and changed", scoreArr);
+        // console.log(scoreArr);
+        return scoreArr;
     }
 };
 
@@ -166,8 +166,8 @@ var scoreDisplay = function () {
     scoreArr.push(scoreDataObj);
     console.log("Array with push", scoreArr);
     sortedScores = scoreArr.sort(sortScore);
-    scoreArr = sortedScores;    
-    console.log("array after push and sort", scoreArr);    
+    scoreArr = sortedScores;
+    console.log("array after push and sort", scoreArr);
     saveScore();
     createScoreEl();
 };
@@ -200,7 +200,7 @@ var submitButtonHandler = function (event) {
 
     if (questionNumber > questionsArr.length) {
         clearAnswerEl();
-        headerContentEl.querySelector("#timer-clock").innerText = "Game Over - You answered all questions! Your Score: " + userScore;
+        headerContentEl.querySelector("#timer-clock").innerText = "You answered all questions! Score: " + userScore;
         // clearInterval(timerStart);
         scoreDisplay();
     } else {
@@ -261,7 +261,7 @@ var startButtonHandler = function () {
 };
 
 var againButtonHandler = function () {
- location.reload();
+    location.reload();
 
 };
 
