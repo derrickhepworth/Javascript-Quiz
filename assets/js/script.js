@@ -40,17 +40,10 @@ var questionsArr = [
 var qI = 0;
 var scoreArr = [
     {
-        initials: "Bottom",
+        initials: "SAD",
         score: 0
-    },
-    {
-        initials: "middle",
-        score: 6
-    },
-    {
-        initals: "Top",
-        score: 12
     }
+  
 ];
 
 //Functions
@@ -91,6 +84,22 @@ var createQuestionEl = function () {
     formEl.appendChild(submitButton);
     return questionEl;
 
+};
+
+var createScoreEl = function (){
+    var scoreBoxEl = document.createElement("div");
+    scoreBoxEl.className = "score-box";
+    pageContentEl.appendChild(scoreBoxEl);
+
+    var scoreBannerEl = document.createElement("h2")
+    scoreBannerEl.className = "score-banner";
+    scoreBoxEl.appendChild(scoreBannerEl);
+
+    for (var i =0; i<scoreArr.length; i++){
+        var scoreEl = document.createElement("li");
+        scoreEl.innerText = ((i +1 ) + ". " + scoreArr[i].initials + "......." + scoreArr[i].score);
+        scoreBoxEl.appendChild(scoreEl);
+    };
 };
 
 var saveScore = function () {
@@ -145,6 +154,7 @@ var scoreDisplay = function () {
     scoreArr = sortedScores;    
     console.log("array after push and sort", scoreArr);    
     saveScore();
+    createScoreEl();
 };
 
 
@@ -233,6 +243,7 @@ var startButtonHandler = function () {
     clearStartEl();
     createQuestionEl();
     createTimerEl();
+    saveScore();
     loadScore();
 
 };
