@@ -200,6 +200,7 @@ var createScoreEl = function () {
     scoreBoxEl.appendChild(scoreBannerEl);
 
     var buttonDivEl = document.createElement("div");
+    buttonDivEl.id = "refresh-btn";
     buttonDivEl.innerHTML = ("<button>Take Quiz Again</button>");
     pageContentEl.appendChild(buttonDivEl);
 
@@ -280,6 +281,7 @@ var scoreDisplay = function () {
     console.log("array after push and sort", scoreArr);
     saveScore();
     createScoreEl();
+    return qInitials;
 };
 
 
@@ -297,7 +299,7 @@ var submitButtonHandler = function (event) {
                 startTime--;
                 startTime--;
                 startTime--;
-                headerContentEl.querySelector("#timer-clock").setAttribute("style", "color: darkred;");
+                headerContentEl.querySelector("#timer-clock").setAttribute("style", "color: red;");
                 headerContentEl.querySelector("#timer-clock").innerText = ":" + (secondMarker-1) + "(-3)";
             }
         }
@@ -309,7 +311,7 @@ var submitButtonHandler = function (event) {
 
     if (questionNumber > questionsArr.length) {
         clearAnswerEl();
-        headerContentEl.querySelector("#timer-clock").innerText = "You answered all questions! Score: " + userScore;
+        headerContentEl.querySelector("#timer-clock").innerText =  " You answered all questions! Score: " + userScore;
         // clearInterval(timerStart);
         scoreDisplay();
     } else {
@@ -340,14 +342,19 @@ var timer = function () {
         if (secondMarker <= - 1) {
             stopTimer();
             headerContentEl.querySelector("#timer-clock").removeAttribute("style");
+            headerContentEl.querySelector("#timer-clock").setAttribute("style", "color: navy;");
+
+
         } else if (questionNumber > questionsArr.length) {
             clearInterval(timerStart);
             headerContentEl.querySelector("#timer-clock").removeAttribute("style");
+            headerContentEl.querySelector("#timer-clock").setAttribute("style", "color: navy;");
+
 
         } else {
             headerContentEl.querySelector("#timer-clock").innerText = ":" + secondMarker;
             if (secondMarker < 11){
-                 headerContentEl.querySelector("#timer-clock").setAttribute("style", "color: darkred;");
+                 headerContentEl.querySelector("#timer-clock").setAttribute("style", "color: red;");
                  headerContentEl.querySelector("#timer-clock").innerText = ":" + secondMarker;
 
             } else {
@@ -361,7 +368,7 @@ var timer = function () {
     var stopTimer = function () {
         clearInterval(timerStart);
         console.log("Timer Stopped");
-        headerContentEl.querySelector("#timer-clock").innerText = "You ran out of time! Score: " + userScore;
+        headerContentEl.querySelector("#timer-clock").innerText =  "You ran out of time! Score: " + userScore;
         clearAnswerEl();
         scoreDisplay();
     };
