@@ -1,0 +1,34 @@
+
+
+#start-quiz{
+border: solid 1px red;
+padding: 5px;
+margin: 5px;
+text-align: center;
+}
+
+.question-box-red{
+    border: solid 1px red;
+    margin: 1px;
+    padding: 1px;
+}
+.question-box-green{
+    border: solid 1px green;
+    margin: 1px;
+    padding: 1px;
+}
+.question-box-yellow{
+    border: solid 1px yellow;
+    margin: 1px;
+    padding: 1px;
+}
+.question-box-purple{
+    border: solid 2px purple;
+    margin: 1px;
+    padding: 1px;
+}
+.question-box-blue{
+    border: blue solid 1px;
+    margin: 1px;
+    padding: 1px;
+}
