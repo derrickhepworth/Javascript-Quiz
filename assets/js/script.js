@@ -71,7 +71,7 @@ var createQuestionEl = function () {
     questionEl.setAttribute("data-question-id", questionsArr[qI].questionId);
     questionEl.innerHTML = "<h3 class='question'>" + questionsArr[qI].ask + "</h3>";
     pageContentEl.appendChild(questionEl);
-    console.log("Question #" + questionsArr[qI].questionId);
+    // console.log("Question #" + questionsArr[qI].questionId);
 
     //Answers
     var formEl = document.createElement("form");
@@ -94,33 +94,38 @@ var createQuestionEl = function () {
 };
 
 var saveScore = function () {
-    console.log("inside", scoreArr);
+    console.log("save happened", scoreArr);
     localStorage.setItem("scoreArr", JSON.stringify(scoreArr));
+};
+
+var sortScore = function (a, b) {
+    console.log("sort is happening");
+    if (a.score < b.score) {
+        return 1;
+    } else if (a.score > b.score) {
+        return -1;
+    } else {
+        return 0;
+    }
 };
 
 var loadScore = function () {
     var gotScores = localStorage.getItem("scoreArr", scoreArr);
     scoreArr = JSON.parse(gotScores);
+    console.log("gotScores", gotScores)
 
-    var sortScore = function (a, b) {
-        if (a.score < b.score) {
-            return 1;
-        } else if (a.score > b.score) {
-            return -1;
-        } else {
-            return 0;
-        }
-    };
-
-    console.log(scoreArr.sort(sortScore));
-
-    console.log(scoreArr);
+    // console.log(scoreArr.sort(sortScore));
+    sortedScores = scoreArr.sort(sortScore);
+    scoreArr = sortedScores;
+    console.log("sorted and changed", scoreArr);
+    // console.log(scoreArr);
     return scoreArr;
 };
 
 
 
 var scoreDisplay = function () {
+    // console.log("loaded", scoreArr);
     var qInitials = prompt("Game over! Enter your initials. No more than 3 charcters. For example 'DMH'.");
     if (!qInitials || qInitials.length > 3) {
         qInitials = prompt("Game over! Enter your initials. No more than 3 charcters. For example 'DMH'.");
@@ -135,7 +140,10 @@ var scoreDisplay = function () {
 
     console.log("Object created", scoreDataObj);
     scoreArr.push(scoreDataObj);
-    console.log("Array after push", scoreArr);
+    console.log("Array with push", scoreArr);
+    sortedScores = scoreArr.sort(sortScore);
+    scoreArr = sortedScores;    
+    console.log("array after push and sort", scoreArr);    
     saveScore();
 };
 
@@ -149,10 +157,10 @@ var submitButtonHandler = function (event) {
             var userAnswer = radio.value;
             if (userAnswer === questionsArr[qI].answerCorrect) {
                 userScore++;
-                console.log("You chose: " + userAnswer, "- Correct", "Score = " + userScore);
+                // console.log("You chose: " + userAnswer, "- Correct", "Score = " + userScore);
 
             } else {
-                console.log("You chose: " + userAnswer, "- Incorrect", "-3 Seconds", "Score = " + userScore);
+                // console.log("You chose: " + userAnswer, "- Incorrect", "-3 Seconds", "Score = " + userScore);
                 startTime--;
                 startTime--;
                 startTime--;
@@ -193,7 +201,7 @@ var createTimerEl = function () {
 };
 
 var timer = function () {
-    console.log("Timer Started")
+    // console.log("Timer Started")
 
     var countdown = function () {
         secondMarker = startTime--;
@@ -225,6 +233,8 @@ var startButtonHandler = function () {
     clearStartEl();
     createQuestionEl();
     createTimerEl();
+    loadScore();
+
 };
 
 
