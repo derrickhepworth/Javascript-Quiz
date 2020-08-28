@@ -173,7 +173,7 @@ margin-right: 5px;
 
 
 
-@media only screen and (max-width: 600px){
+@media only screen and (max-width: 400px){
     #logo{
         font-size: x-large;
         background-color: navy;
