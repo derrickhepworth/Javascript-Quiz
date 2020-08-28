@@ -35,7 +35,7 @@ var questionsArr = [
         answerCorrect: "A",
         questionId: 4
     }, {
-        ask: "What does the '%' operator do?",
+        ask: "What does the % operator do?",
         answerA: "Decrement",
         answerB: "Divide",
         answerC: "Multiply",
@@ -51,12 +51,12 @@ var questionsArr = [
         answerCorrect: "B",
         questionId: 6
     }, {
-        ask: "What does the logical operator '||'  mean?",
+        ask: "What does the logical operator ||  mean?",
         answerA: "and",
         answerB: "and/or",
         answerC: "or",
         answerD: "if",
-        answerCorrect: "A",
+        answerCorrect: "C",
         questionId: 7
     }, {
         ask: "Which binding will propogate CONST or VAR?",
@@ -83,7 +83,7 @@ var questionsArr = [
         answerCorrect: "B",
         questionId: 10
     }, {
-        ask: "Which type of data would 'if(!myVar){};' check for?",
+        ask: "Which type of value does 'if(!myVar){};' check for?",
         answerA: "All types",
         answerB: "Number",
         answerC: "Boolean",
