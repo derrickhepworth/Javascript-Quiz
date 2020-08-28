@@ -11,7 +11,7 @@ var questionsArr = [
         questionId: 1
     },
     {
-        ask: "Which of the following keywords is not a binding in Javascript?",
+        ask: "Which of the keywords is not a binding in Javascript?",
         answerA: "const",
         answerB: "let",
         answerC: "means",
@@ -120,7 +120,7 @@ var questionsArr = [
         answerB: "keyup",
         answerC: "volumeup",
         answerD: "submit",
-        answerCorrect: "A",
+        answerCorrect: "C",
         questionId: 15
     }
 ];
