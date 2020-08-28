@@ -199,14 +199,12 @@ margin-right: 5px;
     @media only screen and (max-width: 400px){
 
     body{
-       height: 90%;
        margin: 0;
        width: 100%;
        padding: 0;
     }
     #start-quiz{
         margin-top: 20%;
-        height: 80%;
         margin-left: 5%;
         margin-right: 5%;
     }
@@ -214,12 +212,10 @@ margin-right: 5px;
         font-size: 40px;
     }
     #start-info ul{
-        height: 50%;
         font-size: xx-large;
     }
     #start-btn{
         width: 130px;
-        height: 5%;
         font-size: x-large;
     }
     .score-box{
