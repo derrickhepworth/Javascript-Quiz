@@ -171,8 +171,6 @@ margin-top:5px;
 margin-right: 5px;
 }
 
-
-
     #logo{
         font-size: x-large;
         background-color: navy;
@@ -201,14 +199,14 @@ margin-right: 5px;
     @media only screen and (max-width: 400px){
 
     body{
-       height: 100%;
+       height: 90%;
        margin: 0;
        width: 100%;
        padding: 0;
     }
     #start-quiz{
         margin-top: 20%;
-        height: 600px;
+        height: 80%;
         margin-left: 5%;
         margin-right: 5%;
     }
@@ -216,12 +214,12 @@ margin-right: 5px;
         font-size: 40px;
     }
     #start-info ul{
-        height: 380px;
+        height: 50%;
         font-size: xx-large;
     }
     #start-btn{
         width: 130px;
-        height: 50px;
+        height: 5%;
         font-size: x-large;
     }
     .score-box{
